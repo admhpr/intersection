@@ -74,8 +74,10 @@ class AFC_Buddy {
         foreach($sections as $section => $contents){
             if($section !== 'page_components' && !in_array($section, $exclude)){
                 $folder = '/partials/sections/' . str_replace('_', '-', $section ) . "/";
-                $path = $folder . str_replace('_', '-', $contents['acf_fc_layout'] ) . '.php';
-                include(locate_template( $path ));	
+            foreach($contents as $fields){
+                    $path = $folder . str_replace('_', '-', $fields['acf_fc_layout'] ) . '.php';
+                    include(locate_template( $path ));	
+                }
             }
         }
     }
