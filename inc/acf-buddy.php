@@ -40,7 +40,7 @@ class AFC_Buddy {
                             if(in_array($value['acf_fc_layout'], $requested_sections)){
                                 array_push($clean_requested_sections[$value["acf_fc_layout"]],$field_values);
                             }else{
-                                array_push($clean_requested_sections[$value["acf_fc_layout"]],$field_values);
+                                array_push($clean_sections[$value["acf_fc_layout"]],$field_values);
                             }
                         }
                     }
@@ -76,7 +76,9 @@ class AFC_Buddy {
                 $folder = '/partials/sections/' . str_replace('_', '-', $section ) . "/";
             foreach($contents as $fields){
                     $path = $folder . str_replace('_', '-', $fields['acf_fc_layout'] ) . '.php';
-                    include(locate_template( $path ));	
+                    if(file_exists($path)){
+                        include(locate_template( $path ));	
+                    }
                 }
             }
         }
