@@ -31,16 +31,16 @@ class AFC_Buddy {
                 
                 if($layout_type !== 'page_components'){
                     foreach($layout as $key => $value){
-                        $clean_requested_sections[$value["acf_fc_layout"]] = [];
-                        $clean_sections[$value["acf_fc_layout"]] = [];
+                        $clean_requested_sections[$key][$value["acf_fc_layout"]] = [];
+                        $clean_sections[$key][$value["acf_fc_layout"]] = [];
                         foreach($value["section_layout"] as $field_values){
                             if(is_null($field_values)){
                                 $field_values = "";
                             }
                             if(in_array($value['acf_fc_layout'], $requested_sections)){
-                                array_push($clean_requested_sections[$value["acf_fc_layout"]],$field_values);
+                                array_push($clean_requested_sections[$key][$value["acf_fc_layout"]],$field_values);
                             }else{
-                                array_push($clean_sections[$value["acf_fc_layout"]],$field_values);
+                                array_push($clean_sections[$key][$value["acf_fc_layout"]],$field_values);
                             }
                         }
                     }
@@ -70,13 +70,15 @@ class AFC_Buddy {
      *      ]
      * @param Array string names of sections to exclude
      */
-    static function render_fields($sections, $exclude = []){
-        foreach($sections as $section => $contents){
-            if($section !== 'page_components' && !in_array($section, $exclude)){
-                $folder = '/partials/sections/' . str_replace('_', '-', $section ) . "/";
-            foreach($contents as $fields){
-                    $path = $folder . str_replace('_', '-', $fields['acf_fc_layout'] ) . '.php';
-                    include(locate_template( $path ));	                   
+    static function render_fields($partials, $exclude = []){
+        foreach($partials as $sections  ){
+            foreach($sections as $section => $contents){
+                if($section !== 'page_components' && !in_array($section, $exclude)){
+                    $folder = '/partials/sections/' . str_replace('_', '-', $section ) . "/";
+                foreach($contents as $fields){
+                        $path = $folder . str_replace('_', '-', $fields['acf_fc_layout'] ) . '.php';
+                        include(locate_template( $path ));	                   
+                    }
                 }
             }
         }
