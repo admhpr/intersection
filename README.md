@@ -1,2 +1,11 @@
 ![alt text](acf-buddy-logo.png "ACF Buddy Logo")
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+
+```
+.
+├── acf-buddy-index.php
+├── inc
+│   └── acf-buddy.php
+└── README
+```
+
+Simple Plugin to work with the 'Sectional Theme'
