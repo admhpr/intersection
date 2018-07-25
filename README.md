@@ -1,4 +1,6 @@
-![alt text](acf-buddy-logo.png "ACF Buddy Logo")
+<div align="center" style="width: 200px">
+    <img src="acf-buddy-logo.png" alt="ACF Buddy Logo">
+</div>
 
 ```
 .
