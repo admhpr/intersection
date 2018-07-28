@@ -24,6 +24,7 @@ function activate_acf_buddy() {
 	}
 }
 
-include( plugin_dir_path( __FILE__ ) . 'inc/acf-buddy.php');
+require_once 'lib/autoload.php';
+
 
 ?>

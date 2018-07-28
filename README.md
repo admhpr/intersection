@@ -3,11 +3,9 @@
 </div>
 
 ```
-.
-├── acf-buddy-index.php
-├── inc
-│   └── acf-buddy.php
-└── README
+
 ```
+
+WIP: Still in development
 
 Simple Plugin to work with the 'Sectional Theme'
