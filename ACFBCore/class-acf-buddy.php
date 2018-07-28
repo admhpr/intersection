@@ -50,6 +50,7 @@ namespace ACFBCore{
                 }
             }
 
+            // TODO:
             // if(!empty($requested_sections)){
             //     return $clean_requested_sections;
             // }
@@ -61,16 +62,6 @@ namespace ACFBCore{
     
         /**
          * @param Array of sections mapped => to their layout => values
-         * @example $all_sections [ 
-         *              banner_section => [
-         *                  acf_fc_layout : "banner_image_slider"
-         *                  banner_image_slider: [
-         *                      0 => [ image values ..]
-         *                      1 => [ image values ..]
-         *                      2 => [ image values ..]
-         *              ]
-         *          ] 
-         *      ]
          * @param Array string names of sections to exclude
          */
         public function render_fields($partials, $exclude = []){
@@ -88,7 +79,12 @@ namespace ACFBCore{
         }
 
         public function process_layout($layout,$layout_type, $requested_sections=[]){
-           
+            /***
+             * 
+             *  FIXME: requested_sections is a place holder at the moment. 
+             *  write unit test
+             *  refactor
+             */
             if($layout_type !== 'page_components'){
                 foreach($layout as $key => $value){
                     $this->clean_requested_sections[$key][$value["acf_fc_layout"]] = [];
