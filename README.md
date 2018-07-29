@@ -10,7 +10,9 @@ WIP: Still in development
 
 Simple Plugin to work with the 'Sectional Theme'
 
-Devlopment Testing Setup
+---
+
+# Devlopment Testing Setup
 
 Along with [PHPunit 6.1](https://phpunit.de/manual/6.1/en/installation.html)
 
@@ -39,3 +41,5 @@ user@computer /location/of/plugin $ phpunit
 ```
 
 and see the results of PHPunit output to the console.
+
+---
