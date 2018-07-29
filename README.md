@@ -16,9 +16,7 @@ Along with [PHPunit 6.1](https://phpunit.de/manual/6.1/en/installation.html)
 
 ensure [WP-CLI ](http://wp-cli.org/#install) is installed.
 
-Run:
-
-The install script located in the bin folder of this project with the following args `db-name` `db_user` `db_password` `db_host`
+Run The install script located in the bin folder of this project with the following args `db-name` `db_user` `db_password` `db_host` `wordpress_version`
 
 > There is an addtional final argument of boolean `true` which can be supplied if your test db is already setup
 
@@ -40,4 +38,4 @@ You should now be able to run:
 user@computer /location/of/plugin $ phpunit
 ```
 
-and see the results of phpunit
+and see the results of PHPunit output to the console.
