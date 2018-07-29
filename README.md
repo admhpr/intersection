@@ -16,9 +16,7 @@ Simple Plugin to work with the 'Sectional Theme'
 
 ---
 
-Along with [PHPunit 6.1](https://phpunit.de/manual/6.1/en/installation.html)
-
-ensure [WP-CLI ](http://wp-cli.org/#install) is installed.
+> Depends on: [PHPunit 6.1](https://phpunit.de/manual/6.1/en/installation.html)
 
 Run The install script located in the bin folder of this project with the following args `db-name` `db_user` `db_password` `db_host` `wordpress_version`
 
