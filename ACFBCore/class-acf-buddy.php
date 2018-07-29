@@ -94,7 +94,14 @@ namespace ACFBCore{
              *  refactor
              */
             if($layout_type !== 'page_components'){
+                
                 foreach($layout as $key => $value){
+
+                    if( count($requested_sections) == 0){
+                        // TODO:
+                    }else{
+                        // TODO:
+                    }
                     $this->clean_requested_sections[$key][$value["acf_fc_layout"]] = [];
                     $this->clean_sections[$key][$value["acf_fc_layout"]] = [];
                     foreach($value["section_layout"] as $field_values){
@@ -108,6 +115,7 @@ namespace ACFBCore{
                         }
                     }
                 }
+
             }
 
             return $this->clean_sections;
