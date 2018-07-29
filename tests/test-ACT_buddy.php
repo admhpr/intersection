@@ -5,31 +5,48 @@
  * @package Acf_Buddy
  */
 
-/**
- * Sample test case.
- */
 require_once 'lib/autoload.php';
 
 use ACFBCore\ACF_buddy;
 
 class ACFBCoreTest extends WP_UnitTestCase {
 
-	/**
-	 * A single example test.
+	/***
+	 * Testing mock data to enusure the process_layout function creates the correct data 
+	 * structure, if this test is passing but there is still issues it is most likely from the other
+	 * parts of the prepare_section function which can't be tested as it uses ACF methods
 	 */
-	function test_sample() {
-		// Replace this with some actual testing code.
-		$this->assertTrue( true );
-	}
 
-	public function testPrepareSections(){
+	public function testProcessLayout(){
 		$acfb = new ACF_buddy();
-		$sections = $acfb->prepare_sections([], true);
+		$phpunit = true;
+		$sections = $acfb->prepare_sections([], $phpunit);
 		$this->assertInternalType('array', $sections);
 		
 		if(count($sections) > 0){
+			
 			$first=$sections[0];
-			$this->assertInternalType('array', $first);
+			$this->assertInternalType('array', $first);	
+			$this->assertArrayHasKey('mock_partial', $first);
+
+			$partial = $first['mock_partial'];
+			$this->assertInternalType('array', $partial);
+			$this->assertInternalType('array', $partial[0]);	
+
+			$partial_first = $partial[0];
+			$this->assertArrayHasKey('acf_fc_layout', $partial_first);
+			$this->assertArrayHasKey($partial_first['acf_fc_layout'], $partial_first);
+
+			$layout = $partial_first[$partial_first['acf_fc_layout']];
+			$this->assertInternalType('array', $layout);
+
+			$section_content_first = $layout[0];
+			$this->assertArrayHasKey('acf_fc_layout', $section_content_first);
+			$this->assertArrayHasKey($section_content_first['acf_fc_layout'], $section_content_first);
+
+			$content = $section_content_first[$section_content_first['acf_fc_layout']];
+			$this->assertInternalType('array', $content);
+		
 		}
 	}
 }

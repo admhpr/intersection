@@ -12,8 +12,6 @@ namespace ACFBCore{
          */
         public function prepare_sections($requested_sections = [], $phpunit=false){
 
-            $field_groups;
-            
 
             if(!$phpunit){
                 $field_groups = \acf_get_field_groups();
@@ -22,41 +20,49 @@ namespace ACFBCore{
                 $layout_type = "mock_partial";
             }
             
-        
-            foreach ( $field_groups as $group ) {
-                // DO NOT USE: $fields = acf_get_fields($group['key']);
-                // because it causes repeater field bugs and returns "trashed" fields
-                $sections = get_posts(array(
-                    'posts_per_page'   => -1,
-                    'post_type'        => 'acf-field',
-                    'orderby'          => 'menu_order',
-                    'order'            => 'ASC',
-                    'suppress_filters' => true, // DO NOT allow WPML to modify the query
-                    'post_parent'      => $group['ID'],
-                    'post_status'      => 'any',
-                    'update_post_meta_cache' => false
-                ));
+            
+            if(isset($field_groups)){
 
-                foreach ( $sections as $section ) {
-                    
-                    if(!$phpunit){
+                foreach ( $field_groups as $group ) {
+                    // DO NOT USE: $fields = acf_get_fields($group['key']);
+                    // because it causes repeater field bugs and returns "trashed" fields
+                    $sections = get_posts(array(
+                        'posts_per_page'   => -1,
+                        'post_type'        => 'acf-field',
+                        'orderby'          => 'menu_order',
+                        'order'            => 'ASC',
+                        'suppress_filters' => true, // DO NOT allow WPML to modify the query
+                        'post_parent'      => $group['ID'],
+                        'post_status'      => 'any',
+                        'update_post_meta_cache' => false
+                    ));
+    
+                    foreach ( $sections as $section ) {
+                        
+                 
                         $layout = get_field($section->post_name);
                         $layout_type = $section->post_excerpt;
+                      
+    
+                        $this->process_layout($layout, $layout_type);
+                        
+                        
                     }
-
-                    $this->process_layout($layout, $layout_type);
-                    
-                    
                 }
+                
+   
+                
+                return $this->clean_sections;
             }
 
+            // mock data for unit testing
             // TODO:
             // if(!empty($requested_sections)){
             //     return $clean_requested_sections;
             // }
-                
-    
-            return $this->clean_sections;
+
+            $this->process_layout($layout, $layout_type);
+            return $this->clean_sections;  
         }
     
     
@@ -65,6 +71,7 @@ namespace ACFBCore{
          * @param Array string names of sections to exclude
          */
         public function render_fields($partials, $exclude = []){
+
             foreach($partials as $sections  ){
                 foreach($sections as $section => $contents){
                     if($section !== 'page_components' && !in_array($section, $exclude)){
@@ -76,6 +83,7 @@ namespace ACFBCore{
                     }
                 }
             }
+
         }
 
         public function process_layout($layout,$layout_type, $requested_sections=[]){
@@ -109,13 +117,19 @@ namespace ACFBCore{
 
         public function create_dummy_layout(){
             return array(
+                    
                 array(
                     "acf_fc_layout" => "mock_partial",
                     "section_layout" => array(
                         array(
                             "acf_fc_layout" => "mock_section",
-                            "specific_layout" => array(
-                                "acf_fc_layout" => "section_contents",
+                            "mock_section" => array(
+                                array(
+                                    "acf_fc_layout" => "section_contents",
+                                    "section_contents" => array(
+                                        "data" => "data"
+                                    ),
+                                )
                             ),
                         ),
                     ),
@@ -125,8 +139,13 @@ namespace ACFBCore{
                     "section_layout" => array(
                         array(
                             "acf_fc_layout" => "mock_section",
-                            "specific_layout" => array(
-                                "acf_fc_layout" => "section_contents",
+                            "mock_section" => array(
+                                array(
+                                    "acf_fc_layout" => "section_contents",
+                                    "section_contents" => array(
+                                        "data" => "data"
+                                    ),
+                                )
                             ),
                         ),
                     ),
@@ -136,8 +155,13 @@ namespace ACFBCore{
                     "section_layout" => array(
                         array(
                             "acf_fc_layout" => "mock_section",
-                            "specific_layout" => array(
-                                "acf_fc_layout" => "section_contents",
+                            "mock_section" => array(
+                                array(
+                                    "acf_fc_layout" => "section_contents",
+                                    "section_contents" => array(
+                                        "data" => "data"
+                                    ),
+                                )
                             ),
                         ),
                     ),
