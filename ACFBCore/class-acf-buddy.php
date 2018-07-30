@@ -50,9 +50,7 @@ namespace ACFBCore{
                         
                     }
                 }
-                
-   
-                
+                         
                 return $this->clean_sections;
             }
 
@@ -99,31 +97,20 @@ namespace ACFBCore{
                             $field_values = "";
                         }
 
-                        
-
-                        // TODO: further abstract
                         $section = $partial['acf_fc_layout'];
-                        if( count($requested_sections) == 0){
+                       
+                          
+                        if( in_array( $section, $requested_sections ) || count($requested_sections) == 0 ){
                             
-                            if( $index <= ( count($layout) - 1 )){
+
+                            if($index <= ( count($layout) - 1 )){
                                 array_push( $this->clean_sections, array());
                             }
-                            
+
                             $this->add_to_clean_sections($index, $section, $field_values);
-
-                        }else{
-                          
-                            if( in_array( $section, $requested_sections ) ){
-                                
-
-                                if($index <= ( count($layout) - 1 )){
-                                    array_push( $this->clean_sections, array());
-                                }
-
-                                $this->add_to_clean_sections($index, $section, $field_values);
-                            
-                            }
+                        
                         }
+                     
                    
                     }
                 }
@@ -142,56 +129,23 @@ namespace ACFBCore{
         }
 
         public function create_dummy_layout(){
-            return array(
-                    
-                array(
-                    "acf_fc_layout" => "mock_partial",
-                    "section_layout" => array(
-                        array(
-                            "acf_fc_layout" => "mock_section",
-                            "mock_section" => array(
-                                array(
-                                    "acf_fc_layout" => "section_contents",
-                                    "section_contents" => array(
-                                        "data" => "data"
-                                    ),
-                                )
+            return array(    
+                     array(
+                        "acf_fc_layout" => "mock_partial",
+                        "section_layout" => array(
+                            array(
+                                "acf_fc_layout" => "mock_section",
+                                "mock_section" => array(
+                                    array(
+                                        "acf_fc_layout" => "section_contents",
+                                        "section_contents" => array(
+                                            "data" => "data"
+                                        ),
+                                    )
+                                ),
                             ),
                         ),
                     ),
-                ),
-                array(
-                    "acf_fc_layout" => "mock_partial",
-                    "section_layout" => array(
-                        array(
-                            "acf_fc_layout" => "mock_section",
-                            "mock_section" => array(
-                                array(
-                                    "acf_fc_layout" => "section_contents",
-                                    "section_contents" => array(
-                                        "data" => "data"
-                                    ),
-                                )
-                            ),
-                        ),
-                    ),
-                ),
-                array(
-                    "acf_fc_layout" => "mock_partial",
-                    "section_layout" => array(
-                        array(
-                            "acf_fc_layout" => "mock_section",
-                            "mock_section" => array(
-                                array(
-                                    "acf_fc_layout" => "section_contents",
-                                    "section_contents" => array(
-                                        "data" => "data"
-                                    ),
-                                )
-                            ),
-                        ),
-                    ),
-                ),
             );
         }
 
