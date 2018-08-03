@@ -7,9 +7,9 @@
 
 require_once 'lib/autoload.php';
 
-use ACFBCore\ACF_buddy;
+use  IntersectionCore\ACF_buddy;
 
-class ACFBCoreTest extends WP_UnitTestCase {
+class  ACF_buddyTest extends WP_UnitTestCase {
 
 	/***
 	 * Testing mock data to enusure the process_layout function creates the correct data 

@@ -1,6 +1,6 @@
 <?php
 
-namespace ACFBCore{
+namespace IntersectionCore{
 
     class ACF_buddy {
         
