@@ -1,9 +1,9 @@
 <?php
 
 
-    namespace IntersectionCore {
+    namespace IntersectionHandler {
       
-        class AI1EC_handler implements interface_Handler  {
+        class AI1EC implements interface_handler  {
         
         public function prepare(){
 

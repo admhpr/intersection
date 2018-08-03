@@ -5,9 +5,9 @@
  *   .
  *   ├── ACFBCore <-- namespace 
  *   │   └── class-acf-handler.php <-- file that contains the class
- *           ACF_handler <-- class name
+ *           ACF <-- class name
  *   
- *   called within the plugin or theme: new ACFBCore\ACF_handler()
+ *   called within the plugin or theme: new ACFBCore\ACF()
  */
 
 spl_autoload_register(function( $filename ) {

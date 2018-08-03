@@ -2,7 +2,7 @@
 /**
  * PHPUnit bootstrap file
  *
- * @package Acf_Handler
+ * @package Intersection
  */
 
 $_tests_dir = getenv( 'WP_TESTS_DIR' );

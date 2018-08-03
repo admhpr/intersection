@@ -1,15 +1,15 @@
 <?php
 /**
- * Class ACFBCoreTest
+ * Class ACFTest
  *
- * @package Acf_Handler
+ * @package Intersection
  */
 
 require_once 'lib/autoload.php';
 
-use  IntersectionCore\ACF_handler;
+use  IntersectionHandler\ACF;
 
-class  ACF_handlerTest extends WP_UnitTestCase {
+class  ACFTest extends WP_UnitTestCase {
 
 	/***
 	 * Testing mock data to enusure the process_layout function creates the correct data 
@@ -18,7 +18,7 @@ class  ACF_handlerTest extends WP_UnitTestCase {
 	 */
 
 	public function testProcessLayout(){
-		$acfb = new ACF_handler();
+		$acfb = new ACF();
 		$phpunit = true;
 		$sections = $acfb->prepare_sections([], $phpunit);
 		$this->assertInternalType('array', $sections);

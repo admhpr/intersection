@@ -1,8 +1,8 @@
 <?php
 
-namespace IntersectionCore{
+namespace IntersectionHandler{
 
-    class ACF_handler implements interface_Handler {
+    class ACF implements interface_handler {
         
         private $clean_sections = [];
         /**
