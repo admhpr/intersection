@@ -2,15 +2,14 @@
 
 namespace IntersectionCore{
 
-    class ACF_buddy {
+    class ACF_handler implements interface_Handler {
         
         private $clean_sections = [];
-        private $clean_requested_sections=[]; 
         /**
          * @param Array containing the string name of the section you wish to request
          * if no param is passed it will return all fields
          */
-        public function prepare_sections($requested_sections = [], $phpunit=false){
+        public function prepare(array $requested_sections = [], $phpunit=false){
 
 
             if(!$phpunit){
@@ -66,7 +65,7 @@ namespace IntersectionCore{
          * @param Array of sections mapped => to their layout => values
          * @param Array string names of sections to exclude
          */
-        public function render_fields($partials, $exclude = []){
+        public function render(array $partials, $exclude = []){
 
             foreach($partials as $section ){
                 $section_type = $section['acf_fc_layout'];
@@ -84,7 +83,7 @@ namespace IntersectionCore{
 
         }
 
-        public function process_layout($layout,$layout_type, $requested_sections=[]){
+        public function process_layout( array $layout, string $layout_type, $requested_sections=[]){
         
 
             if($layout_type !== 'page_components'){
@@ -118,12 +117,11 @@ namespace IntersectionCore{
             }
 
             return $this->clean_sections;
-                
-             
+                   
         }
 
 
-        public function add_to_clean_sections($index, $section, $field_values ){
+        public function add_to_clean_sections( int $index, string $section, array $field_values ){
             $this->clean_sections[$index]["acf_fc_layout"] = $section;
             $this->clean_sections[$index][$section][] = $field_values;
         }

@@ -4,13 +4,14 @@
  * 
  *   .
  *   ├── ACFBCore <-- namespace 
- *   │   └── class-acf-buddy.php <-- file that contains the class
- *           ACF_buddy <-- class name
+ *   │   └── class-acf-handler.php <-- file that contains the class
+ *           ACF_handler <-- class name
  *   
- *   called within the plugin or theme: new ACFBCore\ACF_buddy()
+ *   called within the plugin or theme: new ACFBCore\ACF_handler()
  */
 
 spl_autoload_register(function( $filename ) {
+	xdebug_break();
 	// First, separate the components of the incoming file.
 	$file_path = explode( '\\', $filename );
 	/**
