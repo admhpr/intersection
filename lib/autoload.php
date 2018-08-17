@@ -11,7 +11,6 @@
  */
 
 spl_autoload_register(function( $filename ) {
-	xdebug_break();
 	// First, separate the components of the incoming file.
 	$file_path = explode( '\\', $filename );
 	/**

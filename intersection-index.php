@@ -9,11 +9,9 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
 
 // If this file is called directly, abort.
-if ( ! defined( 'WPINC' ) ) {
-	die;
+if ( ! defined( 'WPINC' ) || ! defined( 'ABSPATH' ) ) {
+	exit;
 }
-
-if( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 register_activation_hook( __FILE__, 'activate_intersection' );
 function activate_intersection() {
@@ -24,7 +22,8 @@ function activate_intersection() {
 	}
 }
 
-require_once 'lib/autoload.php';
+add_action( 'plugins_loaded', 'activate_intersection' );
 
+require_once 'lib/autoload.php';
 
 ?>
