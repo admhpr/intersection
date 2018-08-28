@@ -49,7 +49,7 @@
                 'e.show_map',
                 'p.post_title',
                 'p.post_parent',
-                't.slug',
+                't.slug AS label',
             );
 
             $param_string = implode(',', $params);
@@ -70,7 +70,7 @@
             foreach($events as $event){
                 $now = time();
                 if($event['end'] >= $now){
-                    $is_featured = $event['slug'] === 'featured';
+                    $is_featured = $event['label'] === 'featured';
                     if($is_featured){
                         $featured_events[] = $event;
                     }else{
