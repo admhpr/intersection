@@ -7,7 +7,7 @@
 
 require_once 'lib/autoload.php';
 
-use  IntersectionHandler\ACF;
+use  IntersectionPluginHandler\ACF;
 
 class  ACFTest extends WP_UnitTestCase {
 

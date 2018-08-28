@@ -1,6 +1,6 @@
 <?php
 
-namespace IntersectionHandler{
+namespace IntersectionPluginHandler{
 
     class ACF implements interface_handler {
         

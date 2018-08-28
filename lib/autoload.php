@@ -49,6 +49,7 @@ spl_autoload_register(function( $filename ) {
 		$dir = strtolower( $file_path[ $i ] );
 		$fully_qualified_path .=  $dir . DIRECTORY_SEPARATOR;
 	}
+	
 	$fully_qualified_path .= $file_path[0] . DIRECTORY_SEPARATOR . $file_name ;
 	
 	// Now include the file.
