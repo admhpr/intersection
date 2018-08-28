@@ -14,10 +14,25 @@
 
         public function prepare(array $requested_sections = [], $phpunit=false){
             $events = $this->get_events();
+            return $events;
         }
 
-        public function render(array $partials, $exclude = []){
+        public function render(array $events, $exclude = []){
+           
+            $post_ids = [];
+            
+            foreach( $events as $event ){
+                $post_ids[] = $event['post_id'];
+            }
 
+            $args = array(
+                'post_type' => 'ai1ec_event',
+                'post__in'  => $post_ids,
+            );
+
+            $query = new WP_Query( $args );
+            
+            return $query;
         }
 
         public function get_events(){
@@ -72,10 +87,6 @@
             }
 
             return $sorted_events;
-        }
-
-        public function get_featured_events(){
-
         }
       } // end class
 } // end namespace
