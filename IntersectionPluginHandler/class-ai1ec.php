@@ -32,7 +32,15 @@
 
             $query = new WP_Query( $args );
             
-            return $query;
+            $order = [];
+            foreach($query->posts as $post){
+                $position = array_search($post->ID, $post_ids);
+                $order[$position] = $post;
+            }
+            ksort($order);
+            $query->posts = array_values($order);
+            // return assoc array 
+            return json_decode(json_encode($query,true), true);
         }
 
         public function get_events(){
@@ -59,7 +67,7 @@
                     LEFT JOIN {$this->TERM_RELATIONSHIP_TABLE} rel ON rel.object_id = p.ID 
                     LEFT JOIN {$this->TERM_TAXONOMY_TABLE} tax ON tax.term_taxonomy_id = rel.term_taxonomy_id 
                     LEFT JOIN {$this->TERM_TABLE} t ON t.term_id = tax.term_id
-                    ORDER BY FROM_UNIXTIME(e.start,'%Y %D %M %h:%i:%s %x') DESC";
+                    ORDER BY FROM_UNIXTIME(e.start,'%Y %M %D %h:%i:%s %x') DESC";
 
             $events = $wpdb->get_results($sql, ARRAY_A);
             

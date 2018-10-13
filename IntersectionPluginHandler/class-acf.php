@@ -69,12 +69,11 @@ namespace IntersectionPluginHandler{
 
             foreach($partials as $section ){
                 $section_type = $section['acf_fc_layout'];
-         
                 if($section_type !== 'page_components' && !in_array($section_type, $exclude)){
                     $folder = '/partials/sections/' . str_replace('_', '-', $section['acf_fc_layout'] ) . "/";
-                    
                     foreach($section[$section_type] as $contents){
                         $path = $folder . str_replace('_', '-', $contents['acf_fc_layout'] ) . '.php';
+                        var_export($path);
                         include(locate_template( $path ));	                   
                     }
                 }
@@ -84,7 +83,6 @@ namespace IntersectionPluginHandler{
         }
 
         public function process_layout( array $layout, string $layout_type, $requested_sections=[]){
-        
 
             if($layout_type !== 'page_components'){
                 
