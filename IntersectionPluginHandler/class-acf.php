@@ -1,9 +1,10 @@
 <?php
 
 namespace IntersectionPluginHandler{
-
+    use WP_Query;
     class ACF implements interface_handler {
         
+        private $section_base_path ='/partials/sections/';
         private $clean_sections = [];
         /**
          * @param Array containing the string name of the section you wish to request
@@ -70,10 +71,9 @@ namespace IntersectionPluginHandler{
             foreach($partials as $section ){
                 $section_type = $section['acf_fc_layout'];
                 if($section_type !== 'page_components' && !in_array($section_type, $exclude)){
-                    $folder = '/partials/sections/' . str_replace('_', '-', $section['acf_fc_layout'] ) . "/";
+                    $folder = $this->section_base_path . str_replace('_', '-', $section['acf_fc_layout'] ) . "/";
                     foreach($section[$section_type] as $contents){
                         $path = $folder . str_replace('_', '-', $contents['acf_fc_layout'] ) . '.php';
-                        var_export($path);
                         include(locate_template( $path ));	                   
                     }
                 }
@@ -82,7 +82,29 @@ namespace IntersectionPluginHandler{
 
         }
 
-        public function process_layout( array $layout, string $layout_type, $requested_sections=[]){
+        public function get_section(string $requested_section, string $tag = ''){
+            $id;
+            if($tag === ''){
+                $id = \get_option( 'page_on_front' );
+            }else{
+                $query = new WP_Query( array( 'post_type' => 'any', 'tag' => $tag ) );
+                $id = $query->post->ID;
+            }
+            $path;
+            $the_section;
+            $contents;
+            $fields = \get_fields($id);
+            foreach( $fields['sections'] as $section ){
+                if( $section['acf_fc_layout'] === $requested_section){
+                    $the_section = $section['section_layout'][0];
+                    $path = $this->section_base_path . $requested_section . '/' . str_replace('_', '-', $the_section['acf_fc_layout'] ) . '.php';
+                }
+            }
+            $contents = $the_section;
+            include(locate_template($path));
+        }
+
+        private function process_layout( array $layout, string $layout_type, $requested_sections=[]){
 
             if($layout_type !== 'page_components'){
                 
@@ -119,12 +141,12 @@ namespace IntersectionPluginHandler{
         }
 
 
-        public function add_to_clean_sections( int $index, string $section, array $field_values ){
+        private function add_to_clean_sections( int $index, string $section, array $field_values ){
             $this->clean_sections[$index]["acf_fc_layout"] = $section;
             $this->clean_sections[$index][$section][] = $field_values;
         }
 
-        public function create_dummy_layout(){
+        private function create_dummy_layout(){
             return array(    
                      array(
                         "acf_fc_layout" => "mock_partial",
