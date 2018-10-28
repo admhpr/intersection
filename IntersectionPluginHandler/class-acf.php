@@ -82,6 +82,10 @@ namespace IntersectionPluginHandler{
 
         }
 
+         /**
+         * @param String the section requested
+         * @param String the tag of the page the sections are being pulled from (defaults to home page if not supplied)
+         */
         public function get_section(string $requested_section, string $tag = ''){
             $id;
             if($tag === ''){
@@ -90,9 +94,7 @@ namespace IntersectionPluginHandler{
                 $query = new WP_Query( array( 'post_type' => 'any', 'tag' => $tag ) );
                 $id = $query->post->ID;
             }
-            $path;
-            $the_section;
-            $contents;
+            $path = $the_section = $contents = false;
             $fields = \get_fields($id);
             foreach( $fields['sections'] as $section ){
                 if( $section['acf_fc_layout'] === $requested_section){
