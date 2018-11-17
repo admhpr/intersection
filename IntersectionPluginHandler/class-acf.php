@@ -3,7 +3,6 @@
 namespace IntersectionPluginHandler{
     use WP_Query;
     class ACF implements interface_handler {
-        
         private $section_base_path ='/partials/sections/';
         private $clean_sections = [];
         /**
@@ -50,7 +49,8 @@ namespace IntersectionPluginHandler{
                         
                     }
                 }
-                         
+                
+                var_dump($this->clean_sections);
                 return $this->clean_sections;
             }
 
