@@ -77,7 +77,7 @@
 
             foreach($events as $event){
                 $now = time();
-                if($event['end'] >= $now){
+                if((int)$event['end'] >= $now){
                     $is_featured = $event['label'] === 'featured';
                     if($is_featured){
                         $featured_events[] = $event;
